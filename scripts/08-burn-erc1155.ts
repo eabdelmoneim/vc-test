@@ -8,7 +8,7 @@
 
 import { getContract, sendAndConfirmTransaction } from "thirdweb";
 import { defineChain } from "thirdweb/chains";
-import { burn } from "thirdweb/extensions/erc1155";
+import { burn, balanceOf } from "thirdweb/extensions/erc1155";
 import { client, account } from "./client.js";
 
 async function main() {
@@ -34,9 +34,18 @@ async function main() {
     
     console.log(`\nPreparing to burn ${quantity} token(s) of ID ${tokenId}...`);
     
+    // Check balance before burning
+    console.log("\n--- Balance Before Burn ---");
+    const balanceBefore = await balanceOf({
+      contract,
+      owner: account.address,
+      tokenId: tokenId,
+    });
+    console.log(`Balance of token ID ${tokenId} for ${account.address}: ${balanceBefore}`);
+    
     // Note: You need to have a connected wallet/account to sign the transaction
     // This requires setting up an account in your client configuration
-    console.log("Note: Make sure you have:");
+    console.log("\nNote: Make sure you have:");
     console.log("1. A connected wallet/account in your client configuration");
     console.log("2. Ownership of the tokens you want to burn");
     console.log("3. Sufficient gas for the transaction");
@@ -44,7 +53,6 @@ async function main() {
     console.log("\nBurn transaction prepared.");
     console.log("Ready to execute...");
     
-    // Uncomment the following lines when you have a connected account:
     // Prepare the burn transaction with account parameter
     const transaction = burn({
       contract,
@@ -63,6 +71,16 @@ async function main() {
     console.log("✅ Burn transaction successful!");
     console.log("Transaction hash:", receipt.transactionHash);
     console.log("Gas used:", receipt.gasUsed);
+    
+    // Check balance after burning
+    console.log("\n--- Balance After Burn ---");
+    const balanceAfter = await balanceOf({
+      contract,
+      owner: account.address,
+      tokenId: tokenId,
+    });
+    console.log(`Balance of token ID ${tokenId} for ${account.address}: ${balanceAfter}`);
+    console.log(`Tokens burned: ${balanceBefore - balanceAfter}`);
         
   } catch (error) {
     console.error("Error burning ERC1155 NFT:", error);
