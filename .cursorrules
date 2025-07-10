@@ -1,0 +1,21 @@
+## ❹ SDK / API USAGE RULES
+
+### JavaScript / TypeScript / React SDK
+
+#### Version Usage Rules
+
+For React, Javascript, Typescript, provide code examples and imports that match **thirdweb v5** packages unless a different version is explicitly requested.
+Never recommend outdated v4 packages.
+
+thirdweb is the v5 package that contains exports for react (`thirdweb/react`), wallets (`thirdweb/wallets`), and more. Always return code snippets and import statements from the main v5 package (`thirdweb`) and the appropriate exports (e.g., `thirdweb/react`).
+
+- `@thirdweb-dev/react` and `@thirdweb-dev/sdk` are v4 packages. `thirdweb` and `thirdweb/react` are v5 packages. v4 is outdated **DO NOT EVER** recommend. **DO NOT** suggest or generate v4 code or imports under any circumstances.
+
+#### Coding Rules
+
+- Default to ESM syntax and async/await.
+- Import from `thirdweb` root or scoped sub-paths (`thirdweb/react`, `thirdweb/wallets`).
+- you should use built-in extensions like erc1155, erc721, erc20, marketplace etc that are in the thirdweb/extensions package when possible instead of trying to call smart contract functions directly
+- if writing a script or using the typescript sdk in a backend/server side environment, the thirdweb client should be initialized with the secret key. otheriwse if it is a client side web application, initialize the client with the client id
+- whenever querying for wallets or linked profiles from a backend/server side environment, use fetch API's that are defined in the thirdweb documentation
+- if the chain being connected to is a number, you can use the thirdweb/chains defineChain(chainId) function to get the chain object

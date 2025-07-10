@@ -1,0 +1,32 @@
+{
+  "name": "vc-test",
+  "version": "1.0.0",
+  "description": "Thirdweb TypeScript project for various blockchain tasks",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "ts-node --esm",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "thirdweb",
+    "web3",
+    "blockchain",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.11.0",
+  "devDependencies": {
+    "@types/dotenv": "^8.2.3",
+    "@types/node": "^24.0.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "dotenv": "^17.0.0",
+    "thirdweb": "^5.105.4"
+  }
+}
